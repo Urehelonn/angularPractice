@@ -1,2 +1,2 @@
-# angularPractice
+# Angular Practice
 Practicing while learning Angular
