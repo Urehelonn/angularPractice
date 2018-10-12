@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Author List';
+  zTitle=[
+    {title:'Shipping Details',
+  contain:'Here are details for shopping.'}, {title:'Billing Details',
+  contain:'Here are details for Billing.'}];
 
   // like component
   like = {
