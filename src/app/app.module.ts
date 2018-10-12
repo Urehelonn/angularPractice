@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AuthorComponent } from './component/author/author.component';
@@ -11,6 +11,7 @@ import { PanelComponent } from './component/panel/panel.component';
 import { LikeComponent } from './component/like/like.component';
 import { ZippyComponent } from './component/zippy/zippy.component';
 import { ContactFormComponent } from './component/contact-form/contact-form.component';
+import { SignupFormComponent } from './component/signup-form/signup-form.component';
 
 
 @NgModule({
@@ -23,11 +24,13 @@ import { ContactFormComponent } from './component/contact-form/contact-form.comp
     PanelComponent,
     LikeComponent,
     ZippyComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    SignupFormComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
