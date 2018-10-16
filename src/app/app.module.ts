@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http'
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { AuthorComponent } from './component/author/author.component';
@@ -14,6 +16,7 @@ import { ContactFormComponent } from './component/contact-form/contact-form.comp
 import { SignupFormComponent } from './component/signup-form/signup-form.component';
 import { NewCourseFormComponent } from './component/new-course-form/new-course-form.component';
 import { NewPasswordFormComponent } from './component/new-password-form/new-password-form.component';
+import { PostService } from './service/post.service';
 
 
 @NgModule({
@@ -33,10 +36,14 @@ import { NewPasswordFormComponent } from './component/new-password-form/new-pass
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    PostService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

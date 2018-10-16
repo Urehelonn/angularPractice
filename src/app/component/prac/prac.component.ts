@@ -1,47 +1,80 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../service/post.service';
+import { AppError } from '../../common/app-error';
+import { NotFoundError } from '../../common/not-found-error';
+import { BadRequestError } from '../../common/bad-request-error';
 
 @Component({
   selector: 'app-prac',
-  templateUrl: "./prac.component.html",
+  templateUrl: './prac.component.html',
   styleUrls: ['./prac.component.css'],
   inputs: ['name']
 })
 export class PracComponent implements OnInit {
-  @Output()
-  change = new EventEmitter();
+  posts: any[];
 
-  checked = true;
-  name = 'Hahahah';
-  viewMode ='map';
-  todoList = ['hamish','marigold','coding','placeholder2'];
+  constructor(private service: PostService) {}
 
-  constructor() {}
-
-  ngOnInit() {}
-
-  onClick() {
-    this.checked = !this.checked;
-    this.change.emit({
-      name: this.name,
-      check: this.checked
-    });
+  ngOnInit() {
+    this.service.getPosts().subscribe(
+      response => {
+        this.posts = response.json();
+      },
+      error => {
+        alert('A unexpected error occurred.');
+        console.log(error);
+      }
+    );
   }
 
-  view1Click(){
-    this.viewMode= this.viewMode==='view1'?'other':'view1';
-  }
-  view2Click(){
-    this.viewMode= this.viewMode==='view2'?'other':'view2';
+  createPost(input: HTMLInputElement) {
+    let post = {
+      title: input.value
+    };
+    input.value = '';
+    this.service.addPosts(post).subscribe(
+      response => {
+        post['id'] = response.json().id;
+        this.posts.splice(0, 0, post);
+        console.log(response.json());
+      },
+      (error: AppError) => {
+        if (error instanceof BadRequestError) {
+          // this.form.setErrors(error.json());
+        } else {
+          alert('A unexpected error occurred wehen trying to create new post.');
+          console.log(error);
+        }
+      }
+    );
   }
 
-  addTodo(){
-    this.todoList.push('todo Item'+(this.todoList.length+1));
+  updatePost(post) {
+    this.service.updatePost(post).subscribe(
+      response => {
+        console.log(response.json());
+      },
+      error => {
+        alert('A unexpected error occurred wehen trying to update post.');
+        console.log(error);
+      }
+    );
   }
-  onRemoveTodoItem(item){
-    let res=this.todoList.indexOf(item);
-    this.todoList.splice(res,1);
-  }
-  trackCourse(index, course){
-    return course? course.id:undefined;
+
+  deletePost(post) {
+    this.service.deletePost(post).subscribe(
+      response => {
+        let index = this.posts.indexOf(post);
+        this.posts.splice(index, 1);
+      },
+      (error: AppError) => {
+        if (error instanceof NotFoundError) {
+          alert('This post has already been deleted.');
+        } else {
+          alert('A unexpected error occurred wehen trying to delete post.');
+          console.log(error);
+        }
+      }
+    );
   }
 }

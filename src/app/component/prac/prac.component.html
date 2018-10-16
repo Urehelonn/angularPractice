@@ -1,42 +1,17 @@
 <div class="container">
-    <h1>
-        {{name}}
-        <i class="fas fa-check fa-times"
-            [class.fa-check]="checked"
-            [class.fa-times]="!checked" (click)="onClick()"></i>
-    </h1>
-</div>
+    <input type="text"
+    type="text"
+    #title
+    class="form-control"
+    (keyup.enter)="createPost(title)">
+    <br>
 
-<div *ngIf="checked; then isChecked else unChecked">
-</div>
-<ng-template #isChecked>
-    <h1>this is checked</h1>
-</ng-template>
-<ng-template #unChecked>
-    <h2>this is unchecked</h2>
-</ng-template>
-
-<ul class="nav nav-tabs">
-    <button type="button" class="btn btn-outline-primary active"
-        [class.active]="viewMode==='view1'"
-        (click)="view1Click()">View 1</button>
-    <button type="button" class="btn btn-outline-secondary active"
-        [class.active]="viewMode==='view2'"
-        (click)="view2Click()">View 2</button>
-</ul>
-<div [ngSwitch]="viewMode">
-    <div *ngSwitchCase="'view1'">
-        <button (click)="addTodo()">Add New Todo</button>
-        <ul>
-            <li class="highLight"
-            *ngFor="let todo of todoList; odd as isOdd; trackBy: trackCourse"
-            [class.highLight]=isOdd
-            >{{todo}}
-            <button (click)="onRemoveTodoItem(todo)">Remove Item</button>
+    <ul class="list-group">
+        <li class="list-group-item"
+        *ngFor="let post of posts">
+            {{post.id}}). {{post.title}}
+            <button class="btn btn-default btn-sm"
+            (click)="deletePost(post)">Delete</button>
         </li>
-        </ul>
-    </div>
-    <div *ngSwitchCase="'view2'">Well, this is the view 2 content, with some
-        extra words</div>
-    <div *ngSwitchDefault>Default Blank</div>
+    </ul>
 </div>
