@@ -42,8 +42,7 @@ export class PracComponent implements OnInit {
         if (error instanceof BadRequestError) {
           // this.form.setErrors(error.json());
         } else {
-          alert('A unexpected error occurred wehen trying to create new post.');
-          console.log(error);
+         
         }
       }
     );

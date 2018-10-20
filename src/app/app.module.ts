@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http'
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,10 @@ import { SignupFormComponent } from './component/signup-form/signup-form.compone
 import { NewCourseFormComponent } from './component/new-course-form/new-course-form.component';
 import { NewPasswordFormComponent } from './component/new-password-form/new-password-form.component';
 import { PostService } from './service/post.service';
+import { AppErrorHandler } from './common/app-error-handler';
+import { GithubFollowersComponent } from './component/github-followers/github-followers.component';
+import { DataService } from './service/data.service';
+import { GithubFollowersService } from './service/github-followers.service';
 
 
 @NgModule({
@@ -32,7 +36,8 @@ import { PostService } from './service/post.service';
     ContactFormComponent,
     SignupFormComponent,
     NewCourseFormComponent,
-    NewPasswordFormComponent
+    NewPasswordFormComponent,
+    GithubFollowersComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,10 @@ import { PostService } from './service/post.service';
     HttpModule
   ],
   providers: [
-    PostService
+    PostService,
+    AppErrorHandler,
+    DataService,
+    GithubFollowersService
   ],
   bootstrap: [AppComponent]
 })
