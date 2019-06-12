@@ -28,7 +28,6 @@ export class ServersService {
       }
     );
     console.log('get server id '+id);
-    console.log(server);
     return server;
   }
 
