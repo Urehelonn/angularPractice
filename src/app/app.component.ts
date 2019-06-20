@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AccountsService } from './services/accounts.service';
+import { Component } from '@angular/core';
+import { UserService } from './services/usersService.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers:[AccountsService]
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  accounts: {name: string, status:string}[] = [];
-
-  constructor(private accountService: AccountsService){}
-  ngOnInit(){this.accounts = this.accountService.getAccounts()}
+export class AppComponent {
 }
