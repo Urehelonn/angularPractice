@@ -19,4 +19,5 @@
 <button
   class="btn btn-primary"
   (click)="onUpdateServer()"
-  [routerLink]="['/servers']">Update Server</button>
+  [routerLink]="['/servers']"
+  *ngIf = "allowEdit">Update Server</button>
